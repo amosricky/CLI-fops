@@ -1,7 +1,9 @@
 package cli
 
 import (
+	"CLI-fops/setting"
 	"bytes"
+	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
 	"fmt"
@@ -11,7 +13,6 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"crypto/md5"
 )
 
 var filePath string
@@ -31,7 +32,7 @@ var versionCmd = &cobra.Command{
 	Short: "Get system version.",
 	Long: "Get system version.",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("versionCmd 123")
+		fmt.Println(setting.SystemSetting.Version)
 	},
 }
 
@@ -191,8 +192,14 @@ func refresh()  {
 // Execute adds all child commands to the root command and sets flags appropriately.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Printf("Can't execute salve node：%v", err.Error())
+		fmt.Printf("Can't execute command：%v", err.Error())
 	}
+
+	versionCmd.ResetFlags()
+	checksumCmd.ResetFlags()
+	linecountCmd.ResetFlags()
+	initLinecountCmdFlag()
+	initChecksumCmdFlag()
 }
 
 func Exit()  {
@@ -202,11 +209,19 @@ func Exit()  {
 func init() {
 	// Init Cli
 	cobra.OnInitialize()
-	linecountCmd.Flags().StringVarP(&filePath, "file", "f", "", "File path")
+	initLinecountCmdFlag()
+	initChecksumCmdFlag()
+	rootCmd.AddCommand(fopsCmd)
+	fopsCmd.AddCommand(versionCmd, checksumCmd, linecountCmd)
+}
+
+func initChecksumCmdFlag(){
 	checksumCmd.Flags().StringVarP(&filePath, "file", "f", "", "File path")
 	checksumCmd.Flags().BoolVarP(&md5Flag, "md5", "", false, "Get checksum in hash function-sha256")
 	checksumCmd.Flags().BoolVarP(&sha1Flag, "sha1", "", false, "Get checksum in hash function-sha1")
 	checksumCmd.Flags().BoolVarP(&sha256Flag, "sha256", "", false, "Get checksum in hash function-sha256")
-	rootCmd.AddCommand(fopsCmd)
-	fopsCmd.AddCommand(versionCmd, checksumCmd, linecountCmd)
+}
+
+func initLinecountCmdFlag(){
+	linecountCmd.Flags().StringVarP(&filePath, "file", "f", "", "File path")
 }

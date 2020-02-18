@@ -2,6 +2,7 @@ package main
 
 import (
 	"CLI-fops/cli"
+	"CLI-fops/setting"
 	"bufio"
 	"fmt"
 	"os"
@@ -10,6 +11,7 @@ import (
 
 func main() {
 
+	setting.Setup()
 	fmt.Println("$ You could use [help] to get some instruction or [exit] to leave the terminal.")
 	reader := bufio.NewReader(os.Stdin)
 	for {
