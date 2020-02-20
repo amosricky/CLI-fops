@@ -2,11 +2,10 @@
 Implement a command-line application fops written in Golang.
 
 ## Quick Start
-![](https://raw.githubusercontent.com/amosricky/CLI-fops/master/src/demo_start.gif)
+![](https://raw.githubusercontent.com/amosricky/CLI-fops/master/src/demo_start.png)
 ```
-$ go run main.go 
-or
-$ ./CLI-fops 
+$ go build -o fops
+$ ./fops
 ```
 
 ## Features
@@ -16,30 +15,32 @@ $ ./CLI-fops
 
 ## How it works
 ```
-.
-├── cli               // Use Cobra to define the CLI command.
-│   └── cli.go
-├── CLI-fops          // An executive file.
-├── conf              // System configuration
+. 
+├── cmd               // Use Cobra to define the command.
+│   ├── root.go       // root command - fops
+│   ├── checksum.go   // subcommand - checksum
+│   ├── linecount.go  // subcommand - linecount
+│   └── version.go    // subcommand - version
+├── conf              // System configuration.
 │   └── app.ini
-├── main.go           // Create an loop to read stdin stream.
+├── main.go           // Start point.
 ├── myfile.txt        // Test file.
-├── setting           // Initialize the configuration
+├── setting           // Initialize the configuration.
 │   └── setting.go
 ...
-
 ```
 
 ## CLI Document
 ```
-$ fops help
+./fops help
 File Ops
 
 Usage:
-   fops [command]
+  fops [command]
 
 Available Commands:
   checksum    Get checksum
+  help        Help about any command
   linecount   Count line for file.
   version     Get system version.
 
@@ -47,23 +48,22 @@ Flags:
   -h, --help   help for fops
 ```
 ```
-$ fops linecount --help
+./fops linecount --help
 Count line for file.
 
 Usage:
-   fops linecount [flags]
+  fops linecount [flags]
 
 Flags:
   -f, --file string   File path
   -h, --help          help for linecount
-
 ```
 ```
-$ fops checksum --help
+./fops checksum --help
 Get checksum
 
 Usage:
-   fops checksum [flags]
+  fops checksum [flags]
 
 Flags:
   -f, --file string   File path
@@ -73,11 +73,11 @@ Flags:
       --sha256        Get checksum in hash function-sha256
 ```
 ```
-$ fops version --help
+./fops version --help
 Get system version.
 
 Usage:
-   fops version [flags]
+  fops version [flags]
 
 Flags:
   -h, --help   help for version

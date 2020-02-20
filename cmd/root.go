@@ -31,8 +31,6 @@ func Execute() {
 
 func init() { 
 	cobra.OnInitialize()
-
-	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 func checkFile(path string) (bool, error){
