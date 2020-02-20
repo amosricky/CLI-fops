@@ -18,7 +18,7 @@ func Setup() {
 	var err error
 	cfg, err = ini.Load("./conf/app.ini")
 	if err != nil {
-		logrus.Fatalf("setting.Setup, fail to parse 'conf/app.ini': %v", err)
+		logrus.Fatalf("setting.Setup, fail to parse './conf/app.ini': %v", err)
 	}
 
 	MapTo("system", SystemSetting)

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"io"
 	"os"
@@ -29,7 +28,11 @@ var linecountCmd = &cobra.Command{
 				break
 			}
 
-			f, _ := os.Open(linecountFilePath)
+			f, openFileErr := os.Open(linecountFilePath)
+			if openFileErr != nil{
+				err = openFileErr
+				break
+			}
 			defer f.Close()
 
 			var reader io.Reader
@@ -40,7 +43,7 @@ var linecountCmd = &cobra.Command{
 				err = countErr
 				break
 			}else {
-				fmt.Println(countResult)
+				cmd.Printf("%v", countResult)
 			}
 			break
 		}

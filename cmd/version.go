@@ -3,7 +3,6 @@ package cmd
 import (
 	"CLI-fops/setting"
 	"errors"
-	"fmt"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +14,8 @@ var versionCmd = &cobra.Command{
 		if setting.SystemSetting.Version == ""{
 			return errors.New("Unknown version")
 		}else {
-			fmt.Println(setting.SystemSetting.Version)
+			cmd.Printf(setting.SystemSetting.Version)
+			//fmt.Println(setting.SystemSetting.Version)
 			return nil
 		}
 	},
