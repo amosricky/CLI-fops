@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 )
@@ -32,15 +31,15 @@ var checksumCmd = &cobra.Command{
 			}
 
 			if md5Flag{
-				fmt.Println(genMd5(string(fileContent)))
+				cmd.Printf(genMd5(string(fileContent)))
 			}
 
 			if sha1Flag{
-				fmt.Println(genSha1(string(fileContent)))
+				cmd.Printf(genSha1(string(fileContent)))
 			}
 
 			if sha256Flag{
-				fmt.Println(genSha256(string(fileContent)))
+				cmd.Printf(genSha256(string(fileContent)))
 			}
 			break
 		}

@@ -7,7 +7,11 @@ Implement a command-line application fops written in Golang.
 $ go build -o fops
 $ ./fops
 ```
-
+## Test subcommand
+![](https://raw.githubusercontent.com/amosricky/CLI-fops/master/src/demo_test.png)
+```
+$ go test
+```
 ## Features
 1. Use spf13/cobra as command framework for this project.
 2. Use go-ini/ini to read configuration more structured.

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"CLI-fops/setting"
 	"bytes"
 	"crypto/md5"
 	"crypto/sha1"
@@ -31,6 +32,7 @@ func Execute() {
 
 func init() { 
 	cobra.OnInitialize()
+	setting.Setup()
 }
 
 func checkFile(path string) (bool, error){
