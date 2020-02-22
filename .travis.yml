@@ -9,6 +9,7 @@ env:
     - GO111MODULE=on
 
 script:
+  - cd ./cmd
   - go test
 
 notifications:

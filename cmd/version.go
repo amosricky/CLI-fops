@@ -15,7 +15,6 @@ var versionCmd = &cobra.Command{
 			return errors.New("Unknown version")
 		}else {
 			cmd.Printf(setting.SystemSetting.Version)
-			//fmt.Println(setting.SystemSetting.Version)
 			return nil
 		}
 	},

@@ -16,12 +16,18 @@ var cfg *ini.File
 // Setup initialize the configuration instance
 func Setup() {
 	var err error
-	cfg, err = ini.Load("./conf/app.ini")
-	if err != nil {
-		logrus.Fatalf("setting.Setup, fail to parse './conf/app.ini': %v", err)
-	}
+	pathList := []string{"./conf/app.ini", "../conf/app.ini"}
 
-	MapTo("system", SystemSetting)
+	for _, path := range pathList{
+		cfg, err = ini.Load(path)
+		if err == nil {
+			MapTo("system", SystemSetting)
+			break
+		}
+	}
+	if err != nil{
+		logrus.Fatalf("setting.Setup, fail to parse 'app.ini': %v", err)
+	}
 }
 
 // Map to map section

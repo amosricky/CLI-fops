@@ -10,6 +10,7 @@ $ ./fops
 ## Test subcommand
 ![](https://raw.githubusercontent.com/amosricky/CLI-fops/master/src/demo_test.png)
 ```
+$ cd ./cmd
 $ go test
 ```
 ## Features
